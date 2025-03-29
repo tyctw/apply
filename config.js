@@ -6,7 +6,7 @@ export const CONFIG = {
   cooldownTime: 28800,
   
   // hCaptcha site key (this is a test key)
-  hcaptchaSiteKey: '10000000-ffff-ffff-ffff-000000000001',
+  hcaptchaSiteKey: 'bd02abec-4302-4234-a464-695c3972bccc',
   
   // Site information
   siteName: '桃聯區會考落點分析系統',
