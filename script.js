@@ -140,40 +140,52 @@ function startCountdown(count) {
   }, 1000);
 }
 
-function showInfoModal() {
-  const modal = document.getElementById('infoModal');
-  const closeBtn = modal.querySelector('.close');
-  const modalCloseBtn = modal.querySelector('.modal-close-btn');
-  modal.style.display = 'block';
-  
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-  
-  modalCloseBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-  
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
+// Modal functionality
+const modal = document.getElementById('infoModal');
+const closeBtn = document.querySelector('.close');
+const modalCloseBtn = document.querySelector('.modal-close-btn');
 
-  // Add hover effects to instruction cards
-  const cards = document.querySelectorAll('.instruction-card');
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      card.style.transform = 'translateY(-5px)';
-      card.style.boxShadow = '0 6px 15px rgba(74, 111, 255, 0.15)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = 'translateY(0)';
-      card.style.boxShadow = '0 4px 10px rgba(0,0,0,0.05)';
-    });
-  });
+function openModal() {
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
+
+function closeModal() {
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// Close modal when clicking outside
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+
+// Close modal with close button
+closeBtn.addEventListener('click', closeModal);
+modalCloseBtn.addEventListener('click', closeModal);
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal.classList.contains('active')) {
+    closeModal();
+  }
+});
+
+// Add hover effects to instruction cards
+const cards = document.querySelectorAll('.instruction-card');
+cards.forEach(card => {
+  card.addEventListener('mouseenter', () => {
+    card.style.transform = 'translateY(-5px)';
+    card.style.boxShadow = '0 6px 15px rgba(74, 111, 255, 0.15)';
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'translateY(0)';
+    card.style.boxShadow = '0 4px 10px rgba(0,0,0,0.05)';
+  });
+});
 
 // 禁用快捷鍵
 document.addEventListener('keydown', function (e) {
