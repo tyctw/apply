@@ -99,7 +99,7 @@ function handleFormSubmit(e) {
   })
   .then(() => {
     showResult('<i class="fas fa-check-circle"></i> 邀請碼已發送到您的郵箱，請查收。', 'success');
-    showInfoModal();
+    openModal(); // 已修正：這裡原本是 showInfoModal()
     startCountdown(28800); // 8 hours
   })
   .catch(error => {
