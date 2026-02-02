@@ -413,6 +413,7 @@ button:focus:not(:active)::after {
   }
 }
 
+/* 修正後的 Modal 樣式：解決無法滾動問題 */
 .modal {
   position: fixed;
   top: 0;
@@ -422,12 +423,15 @@ button:focus:not(:active)::after {
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(8px);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* 移除強制置中，改用 auto margin */
+  /* justify-content: center; */
+  /* align-items: center; */
   z-index: 1100;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
+  overflow-y: auto; /* 允許垂直滾動 */
+  padding: 20px 0;   /* 增加上下邊距 */
 }
 
 .modal.active {
@@ -435,6 +439,7 @@ button:focus:not(:active)::after {
   visibility: visible;
 }
 
+/* 修正後的 Modal Content 樣式 */
 .modal-content {
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
@@ -443,6 +448,7 @@ button:focus:not(:active)::after {
   max-width: 600px;
   width: 90%;
   position: relative;
+  margin: auto; /* 自動置中，配合 overflow-y: auto 可解決滾動問題 */
   transform: scale(0.95);
   opacity: 0;
   transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
