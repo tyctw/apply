@@ -1,0 +1,5 @@
+{
+  "name": "全國會考落點分析邀請碼系統",
+  "description": "提供全國會考落點分析系統的邀請碼申請服務，包含人機驗證與防護機制。",
+  "requestFramePermissions": []
+}
