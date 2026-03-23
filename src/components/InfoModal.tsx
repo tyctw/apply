@@ -80,7 +80,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                   <p className="text-sm text-slate-600 leading-relaxed mb-4">
                     如有任何問題或需要協助，請聯繫我們的客服團隊。
                   </p>
-                  <a href="mailto:support@example.com" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-indigo-600 transition-colors bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
+                  <a href="mailto:tyctw.analyze@gmail.com" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-indigo-600 transition-colors bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
                     <Mail className="w-4 h-4" /> 寄送郵件
                   </a>
                 </div>
