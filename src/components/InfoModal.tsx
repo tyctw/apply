@@ -20,7 +20,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
     {
       icon: MailOpen,
       title: "2. 收取邀請信",
-      desc: "請至您的信箱收取系統信件（若未收到請同時檢查垃圾信件匣）。邀請碼保留期限為發送後 7 天。",
+      desc: "請至您的信箱收取系統信件（若未收到請同時檢查垃圾信件匣）。為確保資料安全性，邀請碼僅限「當小時內」有效（至 59 分 59 秒）。",
       color: "text-indigo-600",
       bg: "bg-indigo-100/50",
       border: "border-indigo-100",
@@ -100,7 +100,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                 <div>
                   <h4 className="font-display font-bold text-slate-900 mb-1.5">申請限制提醒</h4>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    為維護系統資源，每個電子郵件地址每次申請需間隔 <strong className="text-amber-700">8 小時</strong> 的冷卻時間。邀請碼僅供個人使用，請妥善保管。
+                    為維護系統資源，每個電子郵件地址每次申請需間隔 <strong className="text-amber-700">3 小時</strong> 的冷卻時間。邀請碼僅供個人使用，請妥善保管。
                   </p>
                 </div>
               </div>
