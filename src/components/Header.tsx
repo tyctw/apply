@@ -29,9 +29,9 @@ export default function Header() {
   }, [isMenuOpen]);
 
   const navLinks = [
-    { href: 'https://tyctw.github.io/', icon: Home, label: '首頁' },
+    { href: 'https://tyctw.github.io/spare', icon: Home, label: '首頁' },
     { href: 'https://tyctw.github.io/report_form', icon: AlertCircle, label: '異常回報系統' },
-    { href: 'https://tyctw.github.io/redirects.html', icon: ExternalLink, label: '邀請碼備用系統' },
+    { href: ' https://tyctw.github.io/invite/', icon: ExternalLink, label: '邀請碼備用系統' },
   ];
 
   return (
