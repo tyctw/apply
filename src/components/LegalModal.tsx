@@ -42,12 +42,12 @@ export default function LegalModal({ isOpen, onClose, type }: LegalModalProps) {
     {
       icon: Info,
       title: "服務說明",
-      content: "本系統提供「全國會考落點分析」之邀請碼發送服務。使用者透過本系統取得之邀請碼，需於指定期限內至落點分析主站點使用。",
+      content: "本系統提供「全國會考落點分析」之邀請碼發送服務。邀請碼具時效性，將於申請當小時的 59 分 59 秒過期失效。",
     },
     {
       icon: Clock,
       title: "使用限制",
-      content: "為維護系統資源與公平性，每個電子郵件地址設有 8 小時的申請冷卻時間。嚴禁使用任何自動化程式、腳本或機器人干擾系統運作。",
+      content: "為維護系統資源與公平性，每個電子郵件地址每次申請設有 3 小時之冷卻時間。嚴禁使用任何自動化程式、腳本或機器人干擾運作。",
     },
     {
       icon: AlertTriangle,
