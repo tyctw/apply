@@ -99,25 +99,41 @@ export default function InvitationForm({ onSuccess, setLoading }: InvitationForm
   return (
     <div className="w-full max-w-md mx-auto">
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-        <div className="flex flex-col gap-2">
-          <label htmlFor="email" className="text-sm font-semibold text-slate-700 text-left ml-1">
-            電子郵件地址
+        <div className="flex flex-col gap-2.5">
+          <label htmlFor="email" className="flex items-center gap-1.5 text-sm font-bold text-slate-700 ml-1">
+            電子郵件信箱
+            <span className="text-indigo-500">*</span>
           </label>
           <div className="relative group">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors group-focus-within:text-indigo-500 text-slate-400">
-              <Mail className="h-5 w-5" />
+            {/* Animated Glow Effect on Focus */}
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-500 rounded-2xl blur opacity-0 group-focus-within:opacity-15 transition duration-500"></div>
+            
+            <div className={`relative flex items-center w-full bg-white/70 backdrop-blur-xl border ${email ? 'border-indigo-200' : 'border-slate-200/80'} hover:border-indigo-300/80 focus-within:border-indigo-500 focus-within:bg-white rounded-2xl shadow-[0_2px_10px_rgb(0,0,0,0.02)] focus-within:shadow-[0_8px_30px_rgb(99,102,241,0.1)] transition-all duration-300 overflow-hidden`}>
+              <div className={`pl-4 pr-3 flex items-center justify-center transition-colors duration-300 ${email ? 'text-indigo-500' : 'text-slate-400 group-focus-within:text-indigo-600'}`}>
+                <Mail className="w-5 h-5" />
+              </div>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="name@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSubmitting || (countdown !== null && countdown > 0)}
+                className="w-full py-4 pr-4 bg-transparent outline-none text-slate-800 placeholder:text-slate-400/70 font-semibold text-[15px] disabled:text-slate-400 transition-all disabled:bg-slate-50/50"
+              />
+              {/* Optional Success Checkmark if email format looks roughly valid */}
+              {email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="pr-4 text-emerald-500"
+                >
+                  <CheckCircle2 className="w-5 h-5" />
+                </motion.div>
+              )}
             </div>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              placeholder="name@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              disabled={isSubmitting || (countdown !== null && countdown > 0)}
-              className="block w-full pl-11 pr-4 py-4 border border-slate-200/60 rounded-2xl bg-white/60 backdrop-blur-sm focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 focus:bg-white transition-all shadow-[0_2px_10px_rgb(0,0,0,0.02)] disabled:bg-slate-50 disabled:text-slate-500 text-slate-800 placeholder:text-slate-400 font-medium text-base"
-            />
           </div>
         </div>
 
