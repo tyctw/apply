@@ -51,25 +51,45 @@ export default function InvitationForm({ onSuccess, setLoading }: InvitationForm
 
     try {
       // API call
-      await fetch(CONFIG.apiEndpoint, {
+      const response = await fetch(CONFIG.apiEndpoint, {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: `email=${encodeURIComponent(email)}`,
       });
 
-      // Since no-cors doesn't return a readable response, we assume success if no network error
-      setResult({ type: 'success', message: '邀請碼已發送到您的郵箱，請查收。' });
-      onSuccess();
-      setCountdown(CONFIG.cooldownTime);
-      setEmail('');
-      captchaRef.current?.resetCaptcha();
-      setHcaptchaToken(null);
+      const responseText = await response.text();
+
+      if (responseText.includes("發送失敗") || responseText.includes("等待")) {
+        setResult({ type: 'warning', message: responseText });
+      } else if (responseText.includes("已發送") || responseText.includes("成功")) {
+        setResult({ type: 'success', message: '邀請碼已發送到您的郵箱，請查收。' });
+        onSuccess();
+        setCountdown(CONFIG.cooldownTime);
+        setEmail('');
+        captchaRef.current?.resetCaptcha();
+        setHcaptchaToken(null);
+      } else {
+        // Fallback or exact error message from backend
+        if (responseText) {
+          setResult({ type: 'warning', message: responseText });
+        } else {
+          setResult({ type: 'success', message: '邀請碼已發送到您的郵箱，請查收。' });
+          onSuccess();
+          setCountdown(CONFIG.cooldownTime);
+          setEmail('');
+          captchaRef.current?.resetCaptcha();
+          setHcaptchaToken(null);
+        }
+      }
     } catch (error: any) {
       console.error('Error:', error);
-      setResult({ type: 'error', message: `發送失敗: ${error.message || '網路錯誤'}` });
+      // Fallback in case of CORS error with older apps script setup
+      setResult({ 
+        type: 'warning', 
+        message: '無法連線到伺服器。若您稍早有成功送出，請先至信箱檢查信件，或稍等片刻再試。' 
+      });
     } finally {
       setIsSubmitting(false);
       setLoading(false);
