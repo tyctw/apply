@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Info, MailOpen, Clock, ShieldAlert, Headset, Check, Mail } from 'lucide-react';
+import { X, BookOpen, Send, MailOpen, Compass, AlertCircle, Check } from 'lucide-react';
 
 interface InfoModalProps {
   isOpen: boolean;
@@ -7,6 +7,36 @@ interface InfoModalProps {
 }
 
 export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
+  const steps = [
+    {
+      icon: Send,
+      title: "1. 驗證與申請",
+      desc: "輸入您的電子郵件地址並完成人機驗證，系統將即時為您處理申請並發送專屬邀請碼。",
+      color: "text-blue-600",
+      bg: "bg-blue-100/50",
+      border: "border-blue-100",
+      shadow: "shadow-blue-900/5",
+    },
+    {
+      icon: MailOpen,
+      title: "2. 收取邀請信",
+      desc: "請至您的信箱收取系統信件（若未收到請同時檢查垃圾信件匣）。邀請碼保留期限為發送後 7 天。",
+      color: "text-indigo-600",
+      bg: "bg-indigo-100/50",
+      border: "border-indigo-100",
+      shadow: "shadow-indigo-900/5",
+    },
+    {
+      icon: Compass,
+      title: "3. 前往主站分析",
+      desc: "複製信件中的邀請碼，點擊連結前往「落點分析主站」，即可登入系統並開始進行落點分析與志願評估。",
+      color: "text-emerald-600",
+      bg: "bg-emerald-100/50",
+      border: "border-emerald-100",
+      shadow: "shadow-emerald-900/5",
+    }
+  ];
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -34,55 +64,44 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
             </button>
 
             <div className="p-6 sm:p-10 overflow-y-auto">
-              <div className="text-center mb-10 pb-8 border-b border-slate-100">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-50 text-indigo-600 mb-5">
-                  <Info className="w-8 h-8" />
+              <div className="text-center mb-8 pb-8 border-b border-slate-100">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-slate-100 text-slate-800 mb-5">
+                  <BookOpen className="w-8 h-8" />
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 tracking-tight">全國會考落點分析說明</h2>
+                <h2 className="text-2xl sm:text-3xl font-display font-bold text-slate-900 tracking-tight">系統使用說明</h2>
+                <p className="mt-3 text-slate-500 font-medium">請遵循以下步驟獲取並使用您的落點分析邀請碼</p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-10">
-                <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-100 hover:border-indigo-100 hover:bg-indigo-50/30 transition-colors group">
-                  <div className="bg-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform">
-                    <MailOpen className="w-6 h-6 text-indigo-500" />
+              <div className="space-y-4 mb-8">
+                {steps.map((step, index) => (
+                  <div 
+                    key={index} 
+                    className={`relative flex gap-5 p-5 sm:p-6 rounded-3xl border bg-white/60 transition-all hover:-translate-y-1 shadow-sm hover:shadow-md ${step.border} ${step.shadow} group`}
+                  >
+                    <div className={`shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform ${step.bg} ${step.color}`}>
+                      <step.icon className="w-6 h-6 sm:w-7 sm:h-7" />
+                    </div>
+                    <div>
+                      <h3 className="font-display font-bold text-lg text-slate-900 mb-1.5">
+                        {step.title}
+                      </h3>
+                      <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                        {step.desc}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-lg font-display font-semibold text-slate-900 mb-2">邀請碼使用方式</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    請在收到邀請碼後，於7天內前往落點分析網站進行分析。系統會自動發送邀請碼至您的電子郵件信箱。
-                  </p>
-                </div>
+                ))}
+              </div>
 
-                <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-100 hover:border-emerald-100 hover:bg-emerald-50/30 transition-colors group">
-                  <div className="bg-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform">
-                    <Clock className="w-6 h-6 text-emerald-500" />
-                  </div>
-                  <h3 className="text-lg font-display font-semibold text-slate-900 mb-2">申請限制說明</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed">
-                    為確保系統穩定性，每個電子郵件地址需間隔8小時才能再次申請新的邀請碼。請妥善保管您的邀請碼。
-                  </p>
+              <div className="bg-amber-50/80 border border-amber-200/50 rounded-3xl p-5 sm:p-6 flex items-start gap-4 mb-8">
+                <div className="bg-amber-100/80 text-amber-600 p-2.5 rounded-xl shrink-0">
+                  <AlertCircle className="w-6 h-6" />
                 </div>
-
-                <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-100 hover:border-amber-100 hover:bg-amber-50/30 transition-colors group">
-                  <div className="bg-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform">
-                    <ShieldAlert className="w-6 h-6 text-amber-500" />
-                  </div>
-                  <h3 className="text-lg font-display font-semibold text-slate-900 mb-2">安全性提醒</h3>
+                <div>
+                  <h4 className="font-display font-bold text-slate-900 mb-1.5">申請限制提醒</h4>
                   <p className="text-sm text-slate-600 leading-relaxed">
-                    邀請碼僅供個人使用，請勿分享給他人。如發現異常使用情況，系統會自動封鎖相關帳號。
+                    為維護系統資源，每個電子郵件地址每次申請需間隔 <strong className="text-amber-700">8 小時</strong> 的冷卻時間。邀請碼僅供個人使用，請妥善保管。
                   </p>
-                </div>
-
-                <div className="bg-slate-50/50 p-6 rounded-3xl border border-slate-100 hover:border-blue-100 hover:bg-blue-50/30 transition-colors group">
-                  <div className="bg-white w-12 h-12 rounded-2xl flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform">
-                    <Headset className="w-6 h-6 text-blue-500" />
-                  </div>
-                  <h3 className="text-lg font-display font-semibold text-slate-900 mb-2">聯絡客服</h3>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-4">
-                    如有任何問題或需要協助，請聯繫我們的客服團隊。
-                  </p>
-                  <a href="mailto:tyctw.analyze@gmail.com" className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-indigo-600 transition-colors bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-100">
-                    <Mail className="w-4 h-4" /> 寄送郵件
-                  </a>
                 </div>
               </div>
 
@@ -91,7 +110,7 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
                 className="w-full py-4 px-4 bg-slate-900 hover:bg-slate-800 text-white rounded-2xl font-display font-semibold shadow-xl shadow-slate-900/20 transition-all flex items-center justify-center gap-2"
               >
                 <Check className="w-5 h-5" />
-                我知道了
+                我已了解
               </button>
             </div>
           </motion.div>
@@ -100,4 +119,5 @@ export default function InfoModal({ isOpen, onClose }: InfoModalProps) {
     </AnimatePresence>
   );
 }
+
 
