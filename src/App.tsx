@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { UserPlus } from 'lucide-react';
+import { UserPlus, BookOpen } from 'lucide-react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import InfoModal from './components/InfoModal';
@@ -63,12 +63,23 @@ export default function App() {
               <UserPlus className="w-10 h-10" />
             </motion.div>
             
-            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 tracking-tight mb-3 relative z-10">
+            <h2 className="text-3xl sm:text-4xl font-display font-bold text-slate-900 tracking-tight mb-4 relative z-10">
               會考落點邀請碼
             </h2>
-            <p className="text-slate-500 mb-10 text-sm sm:text-base font-medium relative z-10">
-              請輸入您的電子郵件以獲取專屬邀請碼
-            </p>
+            
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 relative z-10">
+              <p className="text-slate-500 text-sm sm:text-base font-medium">
+                請輸入您的電子郵件以獲取專屬邀請碼
+              </p>
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-slate-900 font-medium text-sm transition-colors"
+                aria-label="查看使用說明"
+              >
+                <BookOpen className="w-4 h-4" />
+                使用說明
+              </button>
+            </div>
 
             <div className="relative z-10">
               <InvitationForm 
